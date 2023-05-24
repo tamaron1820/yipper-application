@@ -122,7 +122,6 @@
 
   /**
    * Create a new Yip element.
-   *
    * @param {Object} yip - The yip data to use in creating the element
    * @returns {HTMLElement} - The new Yip element
    */
@@ -139,8 +138,7 @@
     namePara.addEventListener("click", showYip);
     let yipTextPara = gen("p");
     yipTextPara.textContent = yip.yip + " #" + yip.hashtag;
-    firstDiv.appendChild(namePara);
-    firstDiv.appendChild(yipTextPara);
+    firstDiv.append(namePara, yipTextPara);
     let secondDiv = gen("div");
     secondDiv.classList.add("meta");
     let datePara = gen("p");
@@ -197,7 +195,7 @@
    * Handle changes to the search input field.
    */
   function handleSearchInputChange() {
-   let trimmedSearchTerm = id("search-term").value.trim();
+    let trimmedSearchTerm = id("search-term").value.trim();
     if (trimmedSearchTerm === "") {
       id("search-btn").disabled = true;
     } else {
