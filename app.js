@@ -20,7 +20,7 @@ const multer = require('multer');
 const app = express();
 const ERROR_RESPONSE = 400;
 const SERVER_ERROR = 500;
-const PORT_NUM = 8000;
+const PORT_NUM = 8588;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
