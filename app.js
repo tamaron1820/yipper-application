@@ -20,7 +20,7 @@ const multer = require('multer');
 const app = express();
 const ERROR_RESPONSE = 400;
 const SERVER_ERROR = 500;
-const PORT_NUM = 8588;
+const PORT_NUM = 8000;
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
@@ -150,6 +150,6 @@ async function getDBConnection() {
 }
 
 // Serve static files from the "public" directory
-app.use(express.static("public"));
+app.use(express.static('public'));
 const PORT = process.env.PORT || PORT_NUM;
 app.listen(PORT);
