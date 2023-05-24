@@ -11,6 +11,7 @@
 "use strict";
 (function() {
 
+  const TIMEOUT = 2000;
   window.addEventListener("load", init);
 
   /**
@@ -75,7 +76,7 @@
     setTimeout(() => {
       id("home").classList.remove("hidden");
       id("new").classList.add("hidden");
-    }, 2000);
+    }, TIMEOUT);
   }
 
   /**
@@ -126,43 +127,35 @@
    * @returns {HTMLElement} - The new Yip element
    */
   function makeYip(yip) {
-      let yipCard = gen("article");
-      yipCard.classList.add("card");
-      yipCard.id = yip.id;
-
-      let img = gen("img");
-      img.src = "img/"+yip.name.toLowerCase().replace(/\s+/g, "-") + ".png";
-
-      let firstDiv = gen("div");
-      let namePara = gen("p");
-      namePara.classList.add("individual");
-      namePara.textContent = yip.name;
-      namePara.addEventListener("click", showYip);
-      let yipTextPara = gen("p");
-      yipTextPara.textContent = yip.yip + " #" + yip.hashtag;
-      firstDiv.appendChild(namePara);
-      firstDiv.appendChild(yipTextPara);
-
-      let secondDiv = gen("div");
-      secondDiv.classList.add("meta");
-      let datePara = gen("p");
-      let date = new Date(yip.date);
-      datePara.textContent = date.toLocaleString();
-      let likesDiv = gen("div");
-      let heartImg = gen("img");
-      heartImg.src = "img/heart.png";
-      heartImg.addEventListener('click',incrementLike);
-      let likesPara = gen("p");
-      likesPara.textContent = yip.likes;
-      likesDiv.appendChild(heartImg);
-      likesDiv.appendChild(likesPara);
-      secondDiv.appendChild(datePara);
-      secondDiv.appendChild(likesDiv);
-
-      yipCard.appendChild(img);
-      yipCard.appendChild(firstDiv);
-      yipCard.appendChild(secondDiv);
-      return yipCard;
+    let yipCard = gen("article");
+    yipCard.classList.add("card");
+    yipCard.id = yip.id;
+    let img = gen("img");
+    img.src = "img/" + yip.name.toLowerCase().replace(/\s+/g, "-") + ".png";
+    let firstDiv = gen("div");
+    let namePara = gen("p");
+    namePara.classList.add("individual");
+    namePara.textContent = yip.name;
+    namePara.addEventListener("click", showYip);
+    let yipTextPara = gen("p");
+    yipTextPara.textContent = yip.yip + " #" + yip.hashtag;
+    firstDiv.appendChild(namePara);
+    firstDiv.appendChild(yipTextPara);
+    let secondDiv = gen("div");
+    secondDiv.classList.add("meta");
+    let datePara = gen("p");
+    let date = new Date(yip.date);
+    datePara.textContent = date.toLocaleString();
+    let likesDiv = gen("div");
+    let heartImg = gen("img");
+    heartImg.src = "img/heart.png";
+    heartImg.addEventListener('click', incrementLike);
+    let likesPara = gen("p");
+    likesPara.textContent = yip.likes;
+    likesDiv.append(heartImg, likesPara);
+    secondDiv.append(datePara, likesDiv);
+    yipCard.append(img, firstDiv, secondDiv);
+    return yipCard;
   }
 
   /**
@@ -271,6 +264,7 @@
       button.disabled = true;
     }
   }
+
   /**
    * Finds the element with the specified ID attribute.
    *

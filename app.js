@@ -22,7 +22,7 @@ const ERROR_RESPONSE = 400;
 const SERVER_ERROR = 500;
 const PORT_NUM = 8588;
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(multer().none());
 
@@ -30,7 +30,7 @@ app.use(multer().none());
  * Route that fetches all yips or searched yips from the database.
  * If a search query parameter is provided, yips matching the query will be returned.
  */
-app.get('/yipper/yips', async function (req, res) {
+app.get('/yipper/yips', async function(req, res) {
   try {
     let db = await getDBConnection();
     let search = req.query.search;
@@ -41,7 +41,7 @@ app.get('/yipper/yips', async function (req, res) {
       text = await db.all("SELECT id FROM yips WHERE yip LIKE ? ORDER BY id;", "%" + search + "%");
     }
     await db.close();
-    res.json({ "yips": text });
+    res.json({"yips": text});
   } catch (error) {
     res.type("text");
     res.status(SERVER_ERROR).send('An error occurred on the server. Try again later.');
@@ -52,7 +52,7 @@ app.get('/yipper/yips', async function (req, res) {
  * Route that fetches all yips by a specific user from the database.
  * The user is specified by the 'user' path parameter.
  */
-app.get('/yipper/user/:user', async function (req, res) {
+app.get('/yipper/user/:user', async function(req, res) {
   try {
     let db = await getDBConnection();
     let user = req.params['user'];
@@ -70,7 +70,7 @@ app.get('/yipper/user/:user', async function (req, res) {
     }
   } catch (err) {
     res.type("text");
-    res.status(SERVER_ERROR).send(SERVER_ERROR_MSG);
+    res.status(SERVER_ERROR).send('An error occurred on the server. Try again later.');
   }
 });
 
@@ -78,11 +78,10 @@ app.get('/yipper/user/:user', async function (req, res) {
  * Route that increments the number of likes for a specific yip in the database.
  * The yip is identified by the 'id' body parameter.
  */
-app.post('/yipper/likes', async function (req, res) {
+app.post('/yipper/likes', async function(req, res) {
   try {
     if (!req.body.id) {
       res.status(ERROR_RESPONSE).send('Missing one or more of the required params.');
-      return;
     } else {
       let db = await getDBConnection();
       let id = req.body.id;
@@ -104,9 +103,10 @@ app.post('/yipper/likes', async function (req, res) {
 
 /**
  * Route that posts a new yip to the database.
- * The yip content, user name, and hashtag are provided through the body parameters 'name' and 'full'.
+ * The yip content, user name, and hashtag are provided through the body
+ * parameters 'name' and 'full'.
  */
-app.post('/yipper/new', async function (req, res) {
+app.post('/yipper/new', async function(req, res) {
   try {
     let name = req.body.name;
     let full = req.body.full;
@@ -131,7 +131,7 @@ app.post('/yipper/new', async function (req, res) {
       res.status(ERROR_RESPONSE).send('Missing one or more of the required params.');
     }
   } catch (err) {
-    res.status(500).type('text')
+    res.status(SERVER_ERROR).type('text')
       .send('An error occurred on the server. Try again later.');
   }
 });
