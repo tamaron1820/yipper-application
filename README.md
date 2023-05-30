@@ -4,8 +4,7 @@ yipperアプリケーション
 Twitterのようなアプリ
 
 # DEMO
-
-
+https://github.com/tamaron1820/yipper-application/assets/104906428/8743c293-e3a8-4c25-89ab-e182972baf5f
 
 # Features
 検索ボックスにユーザーの名前を入力し、searchボタンを押すことでそのユーザーが出した内容が表示される。
