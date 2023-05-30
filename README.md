@@ -5,7 +5,6 @@ Twitterのようなアプリ
 
 # DEMO
 
-https://github.com/tamaron1820/pokedex-application/assets/104906428/7c321739-862c-4b34-915c-bc8114d15e77
 
 
 # Features
